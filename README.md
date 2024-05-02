@@ -1,2 +1,2 @@
-# Stochastic-Transformer
+# Stochastic_Transformer
 Stochastic Transformer
