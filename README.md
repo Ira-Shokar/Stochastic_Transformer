@@ -2,6 +2,8 @@
 
 This repository contains the code for the paper: [Extending Deep Learning Emulation Across Parameter Regimes to Assess Stochastically Driven Spontaneous Transition Events]([https://arxiv.org/abs/2310.16741](https://openreview.net/forum?id=7a5gUX4e5q))
 
+This is an evolving and experimental repositry and is subject to change.
+
 ## Stochastic Latent Transformer Model Architecture
 ![Stochastic Latent Transformer Model Architecture](static/SLT.png "Stochastic Latent Transformer Model Architecture")
 
