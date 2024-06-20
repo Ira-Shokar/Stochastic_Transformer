@@ -13,7 +13,7 @@ This is an evolving and experimental repositry and is subject to change.
 
 ## Citations
 
-If you use Stochatic Latent Transformer please cite:
+If you use Stochastic Transformer please cite:
 
 ```
 @inproceedings{
