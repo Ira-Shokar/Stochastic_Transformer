@@ -4,12 +4,12 @@ This repository contains the code for the paper: [Extending Deep Learning Emulat
 
 This is an evolving and experimental repositry and is subject to change.
 
-## Stochastic Latent Transformer Model Architecture
-![Stochastic Latent Transformer Model Architecture](static/SLT.png "Stochastic Latent Transformer Model Architecture")
+## Stochastic Transformer Model Architecture
+![Stochastic Latent Transformer Model Architecture](static/SLT.png "Stochastic Transformer Model Architecture")
 
 
-## Latidude-time plots displaying jets generated via numerical integration and by the Stochastic Latent Transformer
-![Latidude-time plots displaying jets generated via numerical integration and by the Stochastic Latent Transformer](static/lat_time.png "Latidude-time plots displaying jets generated via numerical integration and by the Stochastic Latent Transformer")
+## Latidude-time plots displaying jets generated via numerical integration and by the Stochastic Transformer for different paramter values
+![Latidude-time plots displaying jets generated via numerical integration and by the Stochastic Transformer for different paramter values](static/lat_time.png "Latidude-time plots displaying jets generated via numerical integration and by the Stochastic Transformer for different paramter values")
 
 ## Citations
 
