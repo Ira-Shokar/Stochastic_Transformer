@@ -20,8 +20,8 @@ def pretrain_data():
 
     # Load data
     print('\nLoading Training Data. \n');
-    X = np.load(f"{DATA_PATH}X_train_{SEQ_LENGTH}.npy")
-    Y = np.load(f"{DATA_PATH}Y_train_{SEQ_LENGTH}.npy")
+    X = np.load(f"{DATA_PATH}pretraining_data/X_train_{SEQ_LENGTH}.npy")
+    Y = np.load(f"{DATA_PATH}pretraining_data/Y_train_{SEQ_LENGTH}.npy")
     print('Training Data Loaded. Number of Data Points = {}\n'.format(len(X)));
 
     X = utils.un_normalise(X)
@@ -40,16 +40,20 @@ def pretrain_data():
     beta  = torch.ones(Val_X.size(0), SEQ_LENGTH, 1, device=utils.device) * 0.9
     Val_X = torch.cat([Val_X, beta], dim=-1)
 
+    return X, Y, Val_X, Val_Y
+
 def finetune_data():
     DATA_PATH = '/home/is500/Documents/transfer_learning/data/training_data/'
 
     print('Loading Data')
-    X     = np.load(f"{DATA_PATH}X_train_paper_5000_{SEQ_LENGTH}.npy")
-    Y     = np.load(f"{DATA_PATH}Y_train_paper_5000_{SEQ_LENGTH}.npy")
-    Val_X = np.load(f"{DATA_PATH}Val_X_train_paper_5000_{SEQ_LENGTH}.npy")
-    Val_Y = np.load(f"{DATA_PATH}Val_Y_train_paper_5000_{SEQ_LENGTH}.npy")
+    X     = np.load(f"{DATA_PATH}finetuning_data/X_train_paper_5000_{SEQ_LENGTH}.npy")
+    Y     = np.load(f"{DATA_PATH}finetuning_data/Y_train_paper_5000_{SEQ_LENGTH}.npy")
+    Val_X = np.load(f"{DATA_PATH}finetuning_data/Val_X_train_paper_5000_{SEQ_LENGTH}.npy")
+    Val_Y = np.load(f"{DATA_PATH}finetuning_data/Val_Y_train_paper_5000_{SEQ_LENGTH}.npy")
 
     print(f'Data Loaded - {len(X)} training examples')
+
+    return X, Y, Val_X, Val_Y
 
 def train(X, Y, Val_X, Val_Y):
     TRAINING_STEPS = len(X)     // BATCH_SIZE
@@ -57,7 +61,7 @@ def train(X, Y, Val_X, Val_Y):
     training_set   = utils.DataGenerator(X    , Y    , TRAINING_STEPS, BATCH_SIZE)
     validation_set = utils.DataGenerator(Val_X, Val_Y, VAL_STEPS     , BATCH_SIZE)
     
-    model = Stochastic_Latent_Transformer(
+    model = ST_1D(
         epochs         = EPOCHS         ,
         seq_len        = SEQ_LENGTH     ,
         ens_size       = ENS_SIZE       ,
@@ -80,6 +84,9 @@ if __name__ == '__main__':
     SEQ_LENGTH    = 2;
     ENS_SIZE      = 2;
 
-    #data = pretrain_data()
-    data = finetune_data()
+    DATA_PATH = f'{utils.which_os}/Stochastic_Transformer/data/'
+    SAVE_PATH = f'{utils.which_os}Beta_Plane_Jets/data/outputs/';
+
+    data = pretrain_data()
+    #data = finetune_data()
     train(*data)

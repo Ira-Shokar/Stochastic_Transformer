@@ -26,11 +26,11 @@ class Stochastic_Transformer_1D(torch.nn.Module):
 
         self.PE = torch.nn.Parameter(torch.zeros(seq_len, dim))
 
-        self.att_block_in  = Attention_Block(dim, num_heads, seq_len, beta=True, stochastic=True)
-        self.att_block_out = Attention_Block(dim, num_heads, seq_len, beta=True, final=True)
+        self.att_block_in  = nn.Attention_Block(dim, num_heads, seq_len, beta=True, stochastic=True)
+        self.att_block_out = nn.Attention_Block(dim, num_heads, seq_len, beta=True, final=True)
 
         self.intermediate_blocks = torch.nn.ModuleList(
-            [Attention_Block(dim, num_heads, seq_len, beta=True) for _ in range(depth-2)],
+            [nn.Attention_Block(dim, num_heads, seq_len, beta=True) for _ in range(depth-2)],
             )
 
         self.mlp = torch.nn.Sequential(

@@ -14,8 +14,8 @@
 # limitations under the License.
 
 
-import torch, numpy as np
-import models
+import torch, tqdm
+import models, utils
 
 class ST_1D:
     def __init__(self, feat_dim=256, latent_dim=256, seq_len=1, ens_size=4, epochs=1,
@@ -43,7 +43,7 @@ class ST_1D:
         # Define Models
         self.model = models.Stochastic_Transformer_1D(self.latent_dim, self.seq_len).to(utils.device)
 
-        self.load_model()
+        #self.load_model()
 
         # Define Optimiser
         self.optimiser = torch.optim.Adam(self.model.parameters(), lr=self.lr)
@@ -51,14 +51,6 @@ class ST_1D:
         # Define LR scheduler
         self.scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
             self.optimiser, factor=0.5, patience=10, threshold=1e-3, min_lr=self.lr*2e-3)
-
-        self.truth_ensemble = utils.truth_ensemble(
-            seq_len         = SEQ_LENGTH,
-            ens_size        = 4,
-            evolution_time  = 500,
-            time_step_start = 100)
-
-        self.truth_long = utils.truth_long(seq_len=SEQ_LENGTH)
 
         # Loss Tracker
         self.loss_dict     = {'MAE':0, 'rep':0, 'spec':0}
